@@ -1,0 +1,67 @@
+def two_sum(nums: list[int], target: int) -> list[int]:
+    """
+    Finds two numbers in an array that add up to a specific target and returns
+    their indices.
+
+    Args:
+        nums: A list of integers.
+        target: The target integer sum.
+
+    Returns:
+        A list containing the indices of the two numbers.
+        Assumes exactly one solution exists.
+    """
+    
+    # 1. Initialize a hash map (dictionary) to store: 
+    #    {number: index}
+    num_map = {} 
+    
+    # 2. Iterate through the array once
+    for i, num in enumerate(nums):
+        # 3. Calculate the required complement
+        #    complement = target - current_num
+        complement = target - num
+        
+        # 4. Check if the complement is already in the map
+        if complement in num_map:
+            # If found, we have the solution!
+            # The current index is 'i', and the complement's index is stored in num_map.
+            return [num_map[complement], i]
+        
+        # 5. If not found, add the current number and its index to the map
+        #    for future lookups.
+        num_map[num] = i
+        
+    # If the loop finishes without finding a solution (though the problem guarantees one)
+    return []
+
+# --- Example Usage ---
+
+# Example 1
+nums1 = [2, 7, 11, 15]
+target1 = 9
+# Expected: [0, 1] because nums[0] + nums[1] == 2 + 7 == 9
+result1 = two_sum(nums1, target1)
+print(f"Input: {nums1}, Target: {target1}")
+print(f"Result: {result1}") 
+# Output: [0, 1] (or [1, 0] depending on implementation, but [0, 1] is typical for this loop order)
+
+print("-" * 20)
+
+# Example 2
+nums2 = [3, 2, 4]
+target2 = 6
+# Expected: [1, 2] because nums[1] + nums[2] == 2 + 4 == 6
+result2 = two_sum(nums2, target2)
+print(f"Input: {nums2}, Target: {target2}")
+print(f"Result: {result2}")
+
+print("-" * 20)
+
+# Example 3
+nums3 = [3, 3]
+target3 = 6
+# Expected: [0, 1] because nums[0] + nums[1] == 3 + 3 == 6
+result3 = two_sum(nums3, target3)
+print(f"Input: {nums3}, Target: {target3}")
+print(f"Result: {result3}")
